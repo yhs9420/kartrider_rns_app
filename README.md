@@ -1,2 +1,3 @@
 # kartrider_api_project
-Testing applications with kartrier api
+Application development using Flutter
+Testing applications with Kartrier Api
