@@ -8,6 +8,6 @@ class HomeBinding extends Bindings {
     //Get.put(AppController());
     //Get.lazyPut<HomeController>(() => HomeController());
     Get.put(HomeController());
-    //Get.put(RiderNameSearchController());
+    Get.put(RiderNameSearchController());
   }
 }

@@ -5,26 +5,37 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:kartrider_rns/main.dart';
+import 'package:xml/xml.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+  final bookshelfXml = '''<?xml version="1.0"?>
+    <bookshelf>
+      <book>
+        <title lang="english">Growing a Language</title>
+        <price>29.99</price>
+      </book>
+      <book>
+        <title lang="english">Learning XML</title>
+        <price>39.95</price>
+      </book>
+      <price>132.00</price>
+    </bookshelf>''';
+  test('코로나 전체 통계', () {
+    final document = XmlDocument.parse(bookshelfXml);
+    final items = document.findAllElements('item');
+    items.forEach((node) {
+      node.findAllElements('accDefRate').map((e) => e.text).forEach(print);
+    });
+  });
+}
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+class RiderInfoModel {
+  String? accessId;
+  String? name;
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  RiderInfoModel({
+    this.accessId,
+    this.name,
   });
 }
